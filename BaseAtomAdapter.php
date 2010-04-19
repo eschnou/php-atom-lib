@@ -1,13 +1,25 @@
 <?php
 
-require_once 'AtomExtensionManager.php';
-require_once 'AtomAdaptorBasic.php';
+require_once 'AtomNS.php';
+require_once 'AtomAdapterBasic.php';
 
 class AtomAdapterException extends Exception { }
 
-abstract class BaseAtomAdapter implements IAtomCommonAttributes{
-	
+abstract class BaseAtomAdapter {	
 	protected $_atomNode;
+	protected $_prefix;
+	
+	public function getBase() {
+		return (string)$this->_atomNode->attributes()->{AtomNS::BASE_ATTRIBUTE};
+	}
+	
+	public function getLang() {
+		return (string)$this->_atomNode->attributes()->{AtomNS::LANG_ATTRIBUTE};
+	}
+	
+	public function getXml() {
+		return $this->_atomNode->asXML();
+	}
 	
 	public function __construct($adapterType,$data,$data_is_url=false) {
 		if (is_string($data)) { 
@@ -16,11 +28,20 @@ abstract class BaseAtomAdapter implements IAtomCommonAttributes{
 		else if ($data instanceof SimpleXMLElement) { 
 			$this->_atomNode = $data;
 		}
+		else if ($data === null) {
+			$this->_atomNode = new SimpleXMLElement("<".$adapterType." xmlns='".AtomNS::NAMESPACE."'></".$adapterType.">",null,$data_is_url);
+		}
 		else { 		
 			throw new AtomAdapterException("Invalid Data Type");
 		}
+		
 		if ($this->_atomNode->getName() != $adapterType) { //check whether $this->_atomNode is the appropriate XML Object, e.g. atom entry node for AtomEntryAdapter
 			throw new AtomAdapterException("Invalid XML Object");
+		}
+		
+		$this->_prefix = $this->_getPrefix(AtomNS::NAMESPACE);
+		if ($this->_prefix === null) {
+			throw new AtomAdapterException("Invalid Atom Document");
 		}
 	}
 	
@@ -34,41 +55,12 @@ abstract class BaseAtomAdapter implements IAtomCommonAttributes{
 		$this->$method($value);
 	}
 	
-	public function getBase() {
-		return (string)$this->_atomNode->attributes()->base;
-	}
-	
-	public function getLang() {
-		return (string)$this->_atomNode->attributes()->lang;
-	}
-	
-	public function getContent() { // I'll handle the HTML and XHTML type for text and content construct later
-		return trim((string)$this->_atomNode);
-	}
-	
-	public function setContent($value) { // I'll handle the HTML and XHTML type for text and content construct later
-		$this->_atomNode[0] = $value;
-	}
-	
-	//depecrated at this moment
-	public function fetchChild($atomAdapter, $atomNode, $adapterType="") {
-		try {
-			if ($adapterType == "") {
-				$result = new $atomAdapter($atomNode);
-			} 
-			else {
-				$result = new $atomAdapter($adapterType, $atomNode);
+	protected function _getPrefix($namespace) {
+		foreach($this->_atomNode->getDocNamespaces(true) as $prefix => $ns) {
+			if ($ns == $namespace) {
+				return $prefix;
 			}
 		}
-		catch (AtomAdapterException $e) {
-			return null;
-		}
-		return $result;
-	}
-	
-	protected function _settleAttribute($attribute) {
-		if (!isset($this->_atomNode->attributes()->$attribute)) {
-			$this->_atomNode->addAttribute($attribute,'');
-		}
+		return null;
 	}
 }

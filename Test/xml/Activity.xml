@@ -8,6 +8,8 @@
 		<uri>sandra.com</uri>
 		<email>sandra@sandra.com</email>
 	</author>
+	<category term="feed category1 term" scheme="feed category1 scheme" label="feed category1 label"/>
+	<category term="feed category2 term" scheme="feed category2 scheme" label="feed category2 label"/>
 	<entry>
 		<id>tag:versioncentral.example.org,2009:/commit/1643245</id>
 		<published>2009-06-01T12:54:00Z</published>
@@ -23,11 +25,11 @@
 			<summary>Fixing punctuation because it makes it more readable.</summary>
 			<link rel="alternate" type="text/html" href="..." />
 		</activity:object>
+		<summary type="text">entry1 summary</summary>
 	</entry>
 	<entry>
 		<id>tag:photopanic.example.com,2009:/activity/4859568/PhotoAdd/2519358/2009171</id>
 		<title type="text">Geraldine added two new photos to the My Pets album.</title>
-		<published>2009-06-21T00:28:35Z</published>
 		<author>
 			<name>Geraldine</name>
 			<uri>http://example.com/geraldine</uri>
@@ -104,17 +106,17 @@
 			<link rel="enclosure" type="image/jpeg" href="/geraldine/photos/1634/full.jpg" />
 		</activity:object>
 	</entry>
-	<entry>
-		<id>tag:photopanic.example.com,2009:/activity/4859568/PhotoAdd/2519358/2009172</id>
-		<title type="text">Geraldine added two new photos to the Animal album.</title>
-		<published>2009-06-21T00:28:35Z</published>
-		<author>
-			<name>Geraldine</name>
-			<uri>http://example.com/geraldine</uri>
-			<id>tag:photopanic.example.com,2009:/Person/4859568</id>
-			<link rel="alternate" type="text/html" href="http://example.com/geraldine" />
-		</author>
-		<link rel="alternate" type="text/html" href="http://example.com/geraldine/activities/1234" />
-		<content type="xhtml">...</content>
+	<entry xmlns:atom="http://www.w3.org/2005/Atom" >
+		<atom:id>tag:photopanic.example.com,2009:/activity/4859568/PhotoAdd/2519358/2009172</atom:id>
+		<atom:title type="text">atom with prefix</atom:title>
+		<atom:published>2009-06-21T00:28:35Z</atom:published>
+		<atom:author>
+			<atom:name>Geraldine</atom:name>
+			<atom:uri>http://example.com/geraldine</atom:uri>
+			<atom:id>tag:photopanic.example.com,2009:/Person/4859568</atom:id>
+			<atom:link rel="alternate" type="text/html" href="http://example.com/geraldine" />
+		</atom:author>
+		<atom:link rel="alternate" type="text/html" href="http://example.com/geraldine/activities/1234" />
+		<atom:content type="xhtml">...</atom:content>
 	</entry>
 </feed>

@@ -1,65 +1,58 @@
 <?php
 
-require_once 'BaseAtomAdapter.php';
+require_once 'StandardAtomAdapter.php';
 
-class AtomLinkAdapter extends BaseAtomAdapter {
-	const TAG_NAME = 'link';
-	
-	public function __construct($data, $data_is_url=false) {
-		parent::__construct(self::TAG_NAME, $data, $data_is_url);
-	}
+class AtomLinkAdapter extends StandardAtomAdapter {
 	
 	public function getHref() {
-		return (string)$this->_atomNode->attributes()->href;
-	}
-	
-	public function getRel() {
-		return (string)$this->_atomNode->attributes()->rel;
-	}
-	
-	public function getType() {
-		return (string)$this->_atomNode->attributes()->type;
+		return $this->_getAttribute(AtomNS::HREF_ATTRIBUTE);
 	}
 	
 	public function getHreflang() {
-		return (string)$this->_atomNode->attributes()->hreflang;
-	}
-	
-	public function getTitle() {
-		return (string)$this->_atomNode->attributes()->title;
+		return $this->_getAttribute(AtomNS::HREFLANG_ATTRIBUTE);
 	}
 	
 	public function getLength() {
-		return (string)$this->_atomNode->attributes()->length;
+		return $this->_getAttribute(AtomNS::LENGTH_ATTRIBUTE);
+	}
+	
+	public function getRel() {
+		return $this->_getAttribute(AtomNS::REL_ATTRIBUTE);
+	}
+	
+	public function getTitle() {
+		return $this->_getAttribute(AtomNS::TITLE_ATTRIBUTE);
+	}
+	
+	public function getType() {
+		return $this->_getAttribute(AtomNS::TYPE_ATTRIBUTE);
 	}
 	
 	public function setHref($value) {
-		$this->_settleAttribute('href');
-		$this->_atomNode->attributes()->href = $value;
-	}
-	
-	public function setRel($value) {
-		$this->_settleAttribute('rel');
-		$this->_atomNode->attributes()->rel = $value;
-	}
-	
-	public function setType($value) {
-		$this->_settleAttribute('type');
-		$this->_atomNode->attributes()->type = $value;
+		$this->_setAttribute(AtomNS::HREF_ATTRIBUTE, $value);
 	}
 	
 	public function setHreflang($value) {
-		$this->_settleAttribute('hreflang');
-		$this->_atomNode->attributes()->hreflang = $value;
-	}
-	
-	public function setTitle($value) {
-		$this->_settleAttribute('title');
-		$this->_atomNode->attributes()->title = $value;
+		$this->_setAttribute(AtomNS::HREFLANG_ATTRIBUTE, $value);
 	}
 	
 	public function setLength($value) {
-		$this->_settleAttribute('length');
-		$this->_atomNode->attributes()->length = $value;
+		$this->_setAttribute(AtomNS::LENGTH_ATTRIBUTE, $value);
+	}
+	
+	public function setRel($value) {
+		$this->_setAttribute(AtomNS::REL_ATTRIBUTE, $value);
+	}
+	
+	public function setTitle($value) {
+		$this->_setAttribute(AtomNS::TITLE_ATTRIBUTE, $value);
+	}
+	
+	public function setType($value) {
+		$this->_setAttribute(AtomNS::TYPE_ATTRIBUTE, $value);
+	}
+	
+	public function __construct($data, $data_is_url=false) {
+		parent::__construct(AtomNS::LINK_ELEMENT, $data, $data_is_url);
 	}
 }

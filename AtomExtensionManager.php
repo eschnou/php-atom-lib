@@ -6,18 +6,12 @@ class AtomExtensionManager {
 	private static $_instance;
 	protected $_adapterTable;
 	
-	private function __construct() {}
-	
 	public static function getInstance() {
 		if (!self::$_instance) {
 			self::$_instance = new AtomExtensionManager();
 		}
 		
 		return self::$_instance;
-	}
-	
-	public function registerExtensionAdapter(IAtomExtensionFactory $adapter) {
-		$this->_adapterTable[$adapter->getNamespace()] = $adapter;
 	}
 	
 	public function getExtensionAdapter(SimpleXMLElement $atomNode, $namespace) {
@@ -28,4 +22,10 @@ class AtomExtensionManager {
 			throw new ExtensionManagerException('No Extension Adaptor Available!');
 		}
 	}
+	
+	public function registerExtensionAdapter(IAtomExtensionFactory $adapter) {
+		$this->_adapterTable[$adapter->getNamespace()] = $adapter;
+	}
+	
+	private function __construct() {}
 }

@@ -1,10 +1,6 @@
 <?php
 
-require_once 'BaseAtomAdapter.php';
+require_once 'SimpleAtomAdapter.php';
 
-class AtomDateConstructAdapter extends BaseAtomAdapter {
-	
-	public function __construct($adapterType, $data, $data_is_url=false) {
-		parent::__construct($adapterType, $data, $data_is_url);
-	}
+class AtomDateConstructAdapter extends SimpleAtomAdapter { //langsung getContent mungkin lebih gampang
 }
