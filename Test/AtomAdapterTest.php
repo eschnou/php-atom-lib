@@ -4,6 +4,7 @@ require_once 'PHPUnit/Framework.php';
 require_once './../AtomFeedAdapter.php';
 require_once './../ActivityExtension/ActivityExtensionFactory.php';
 require_once './../ThreadingExtension/ThreadingExtensionFactory.php';
+require_once './../MediaExtension/MediaExtensionFactory.php';
 
 class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 	private $_atomNode;
@@ -166,6 +167,7 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
      */
 	public function testNoActivityFeedAdapter() {
 		$this->_xManager->registerExtensionAdapter(new ActivityExtensionFactory());
+		$this->_xManager->registerExtensionAdapter(new MediaExtensionFactory());
 		$feedEntry = $this->_feed->getExtension('http://activitystrea.ms/spec/1.0/');
 	}
 	
@@ -405,7 +407,7 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		
 		$this->assertEquals($this->_activityEntry[0]->object[0]->objectType[0]->value		, 'http://versioncentral.example.org/activity/changeset');
 		$this->assertEquals($this->_activityEntry[0]->object[0]->title->value				, 'Punctuation Changeset');
-		$this->assertEquals($this->_activityEntry[0]->object[0]->id->value				, 'tag:versioncentral.example.org,2009:/change/1643245');
+		$this->assertEquals($this->_activityEntry[0]->object[0]->id->value					, 'tag:versioncentral.example.org,2009:/change/1643245');
 		$this->assertEquals($this->_activityEntry[0]->object[1]								, null);
 		
 		$newEntryVerb[0] = $this->_activityEntry[0]->addVerb();
@@ -520,6 +522,47 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		return $new;
 	}
 	
+	public function testBuildEntry() {
+		$newEntry = new AtomEntryAdapter(null);
+		
+		$newEntry->title		= 'New Entry Title';
+		$newEntry->title->type	= 'New Entry Title Type';
+		
+		$newEntry->id			= 'New Entry Id';
+		$newEntry->updated		= 'New Entry Updated';
+		$newEntry->published	= 'New Entry Published';
+		
+		$newEntry->summary		= 'New Entry Summary';
+		$newEntry->summary->type= 'New Entry Summary Type';
+		
+		$newEntry->content		= 'New Entry Content';
+		$newEntry->content->type= 'New Entry Content Type';
+		$newEntry->content->src	= 'New Entry Content Src';
+		
+		$newEntryAuthor = $newEntry->addAuthor();
+		$newEntryAuthor->name	= 'New Entry Author Name';
+		$newEntryAuthor->uri	= 'New Entry Author Uri';
+		$newEntryAuthor->email	= 'New Entry Author Email';
+		
+		$newEntryLink = $newEntry->addLink();
+		$newEntryLink->href		= 'New Entry Link Href';
+		$newEntryLink->type		= 'New Entry Link Type';
+		$newEntryLink->rel		= 'New Entry Link Rel';
+		$newEntryLink->title	= 'New Entry Link Title';
+		$newEntryLink->hreflang	= 'New Entry Link Hreflang';
+		$newEntryLink->length	= 'New Entry Link Length';
+		
+		$newEntryCategory = $newEntry->addCategory();
+		$newEntryCategory->term		= 'New Entry Category Term';
+		$newEntryCategory->scheme	= 'New Entry Category Scheme';
+		$newEntryCategory->label	= 'New Entry Category Label';
+		
+		$expectedResult = '<?xml version="1.0"?>
+<entry xmlns="http://www.w3.org/2005/Atom"><title type="New Entry Title Type">New Entry Title</title><id>New Entry Id</id><updated>New Entry Updated</updated><published>New Entry Published</published><summary type="New Entry Summary Type">New Entry Summary</summary><content type="New Entry Content Type" src="New Entry Content Src">New Entry Content</content><author><name>New Entry Author Name</name><uri>New Entry Author Uri</uri><email>New Entry Author Email</email></author><link href="New Entry Link Href" type="New Entry Link Type" rel="New Entry Link Rel" title="New Entry Link Title" hreflang="New Entry Link Hreflang" length="New Entry Link Length"/><category term="New Entry Category Term" scheme="New Entry Category Scheme" label="New Entry Category Label"/></entry>';
+		
+		$this->assertEquals(trim($newEntry->getXml()), trim($expectedResult));
+	}
+	
 	/**
 	 * @depends testBuildFeed
 	 */
@@ -529,6 +572,8 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		$newActivityEntry = $new->entry[0]->getExtension(ActivityNS::NAMESPACE);
 		$newActivityEntry->addVerb()->value						= 'New Activity Entry Verb';
 		$newActivityEntry->addObject()->addObjectType()->value	= 'New Activity Entry Object Object Type';
+		
+		$newActivityEntry->object[0]->addLink()->duration 		= 'New Activity Entry Object Link Duration';		
 		
 		$newActivityEntry->generator							= 'New Activity Entry Generator';
 		$newActivityEntry->generator->uri						= 'New Activity Entry Generator Uri';
@@ -561,7 +606,7 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		$newEntryActivityAuthorLink->length		= 'New Entry Activity Author Link Length';
 		
 		$expectedResult = '<?xml version="1.0"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:a="http://activitystrea.ms/spec/1.0/"><title type="New Title Type">New Title</title><id>New Id</id><updated>New Updated</updated><generator uri="New Generator Uri" version="New Generator Version">New Generator</generator><author><name>New Author Name</name><uri>New Author Uri</uri><email>New Author Email</email></author><link href="New Link Href" type="New Link Type" rel="New Link Rel" title="New Link Title" hreflang="New Link Hreflang" length="New Link Length"/><category term="New Category Term" scheme="New Category Scheme" label="New Category Label"/><entry><title type="New Entry Title Type">New Entry Title</title><id>New Entry Id</id><updated>New Entry Updated</updated><published>New Entry Published</published><summary type="New Entry Summary Type">New Entry Summary</summary><content type="New Entry Content Type" src="New Entry Content Src">New Entry Content</content><author><name>New Entry Author Name</name><uri>New Entry Author Uri</uri><email>New Entry Author Email</email><a:object-type>New Entry Activity Author Object Type</a:object-type><id>New Entry Activity Author Id</id><link href="New Entry Activity Author Link Href" type="New Entry Activity Author Link Type" rel="New Entry Activity Author Link Rel" title="New Entry Activity Author Link Title" hreflang="New Entry Activity Author Link Hreflang" length="New Entry Activity Author Link Length"/></author><link href="New Entry Link Href" type="New Entry Link Type" rel="New Entry Link Rel" title="New Entry Link Title" hreflang="New Entry Link Hreflang" length="New Entry Link Length"/><category term="New Entry Category Term" scheme="New Entry Category Scheme" label="New Entry Category Label"/><a:verb>New Activity Entry Verb</a:verb><a:object><a:object-type>New Activity Entry Object Object Type</a:object-type></a:object><generator uri="New Activity Entry Generator Uri" version="New Activity Entry Generator Version">New Activity Entry Generator</generator><a:target><a:object-type>New Activity Entry Target Object Type</a:object-type><id>New Activity Entry Target Id</id><title>New Activity Entry Target Title</title><a:object-type>New Activity Entry Target Object Type</a:object-type><link href="New Entry Activity Target Link Href" type="New Entry Activity Target Link Type" rel="New Entry Activity Target Link Rel" title="New Entry Activity Target Link Title" hreflang="New Entry Activity Target Link Hreflang" length="New Entry Activity Target Link Length"/></a:target></entry></feed>';
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:a="http://activitystrea.ms/spec/1.0/"><title type="New Title Type">New Title</title><id>New Id</id><updated>New Updated</updated><generator uri="New Generator Uri" version="New Generator Version">New Generator</generator><author><name>New Author Name</name><uri>New Author Uri</uri><email>New Author Email</email></author><link href="New Link Href" type="New Link Type" rel="New Link Rel" title="New Link Title" hreflang="New Link Hreflang" length="New Link Length"/><category term="New Category Term" scheme="New Category Scheme" label="New Category Label"/><entry><title type="New Entry Title Type">New Entry Title</title><id>New Entry Id</id><updated>New Entry Updated</updated><published>New Entry Published</published><summary type="New Entry Summary Type">New Entry Summary</summary><content type="New Entry Content Type" src="New Entry Content Src">New Entry Content</content><author><name>New Entry Author Name</name><uri>New Entry Author Uri</uri><email>New Entry Author Email</email><a:object-type>New Entry Activity Author Object Type</a:object-type><id>New Entry Activity Author Id</id><link href="New Entry Activity Author Link Href" type="New Entry Activity Author Link Type" rel="New Entry Activity Author Link Rel" title="New Entry Activity Author Link Title" hreflang="New Entry Activity Author Link Hreflang" length="New Entry Activity Author Link Length"/></author><link href="New Entry Link Href" type="New Entry Link Type" rel="New Entry Link Rel" title="New Entry Link Title" hreflang="New Entry Link Hreflang" length="New Entry Link Length"/><category term="New Entry Category Term" scheme="New Entry Category Scheme" label="New Entry Category Label"/><a:verb>New Activity Entry Verb</a:verb><a:object><a:object-type>New Activity Entry Object Object Type</a:object-type><link xmlns:media="http://purl.org/syndication/atommedia" media:duration="New Activity Entry Object Link Duration"/></a:object><generator uri="New Activity Entry Generator Uri" version="New Activity Entry Generator Version">New Activity Entry Generator</generator><a:target><a:object-type>New Activity Entry Target Object Type</a:object-type><id>New Activity Entry Target Id</id><title>New Activity Entry Target Title</title><a:object-type>New Activity Entry Target Object Type</a:object-type><link href="New Entry Activity Target Link Href" type="New Entry Activity Target Link Type" rel="New Entry Activity Target Link Rel" title="New Entry Activity Target Link Title" hreflang="New Entry Activity Target Link Hreflang" length="New Entry Activity Target Link Length"/></a:target></entry></feed>';
 		$this->assertEquals(trim($new->getXml()), trim($expectedResult));
 	}
 }

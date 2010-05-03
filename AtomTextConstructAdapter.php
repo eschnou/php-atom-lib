@@ -1,8 +1,8 @@
 <?php
 
-require_once 'StandardAtomAdapter.php';
+require_once 'SimpleAtomAdapter.php';
 
-class AtomTextConstructAdapter extends StandardAtomAdapter {
+class AtomTextConstructAdapter extends SimpleAtomAdapter {
 	
 	public function getType() {
 		return $this->_getAttribute(AtomNS::TYPE_ATTRIBUTE);

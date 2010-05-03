@@ -10,15 +10,28 @@ abstract class BaseAtomAdapter {
 	protected $_prefix;
 	
 	public function getBase() {
-		return (string)$this->_atomNode->attributes()->{AtomNS::BASE_ATTRIBUTE};
+		return (string)$this->_atomNode->attributes("xml", true)->{AtomNS::BASE_ATTRIBUTE};
 	}
 	
 	public function getLang() {
-		return (string)$this->_atomNode->attributes()->{AtomNS::LANG_ATTRIBUTE};
+		return (string)$this->_atomNode->attributes("xml", true)->{AtomNS::LANG_ATTRIBUTE};
 	}
 	
 	public function getXml() {
 		return $this->_atomNode->asXML();
+	}
+	
+	public function addNamespace($prefix, $namespace) {
+		$this->_atomNode->addAttribute($prefix.':temp',null,$namespace);
+		unset($this->_atomNode->attributes($namespace)->temp);
+	}
+
+	public function getExtension($namespace) {
+		return AtomExtensionManager::getInstance()->getExtensionAdapter($this->_atomNode, $namespace);
+	}
+	
+	public function getDocumentType() {
+		return $this->_atomNode->getName();
 	}
 	
 	public function __construct($adapterType,$data,$data_is_url=false) {
@@ -62,5 +75,24 @@ abstract class BaseAtomAdapter {
 			}
 		}
 		return null;
+	}
+
+	protected function _getAttribute($attribute, $namespace=null) {
+		return (string)$this->_atomNode->attributes($namespace)->$attribute;
+	}
+	
+	protected function _setAttribute($attribute, $value, $namespace=null) {
+		if ($value !== null)
+		{
+			if (!isset($this->_atomNode->attributes($namespace)->$attribute)) {
+				if ($this->_prefix != "") {
+					$attribute = $this->_prefix . ":" . $attribute;
+				}
+				$this->_atomNode->addAttribute($attribute, $value, $namespace);
+				return;
+			}
+			
+			$this->_atomNode->attributes($namespace)->$attribute = $value;
+		}
 	}
 }

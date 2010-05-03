@@ -1,8 +1,8 @@
 <?php
 
-require_once 'StandardAtomAdapter.php';
+require_once 'SimpleAtomAdapter.php';
 
-class AtomCategoryAdapter extends StandardAtomAdapter {
+class AtomCategoryAdapter extends SimpleAtomAdapter {
 
 	public function getLabel() {
 		return $this->_getAttribute(AtomNS::LABEL_ATTRIBUTE);

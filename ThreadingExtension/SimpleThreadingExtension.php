@@ -1,6 +1,6 @@
 <?php
 
-class SimpleThreadingExtension extends StandardAtomAdapter {
+class SimpleThreadingExtension extends SimpleAtomAdapter {
 
 	public function __construct(SimpleXMLElement $data, $extensionType) {		
 	
@@ -12,7 +12,7 @@ class SimpleThreadingExtension extends StandardAtomAdapter {
 		
 		$this->_prefix = $this->_getPrefix(ThreadingNS::NAMESPACE);
 		if ($this->_prefix === null) {
-			$this->_prefix = 'thr';
+			$this->_prefix = ThreadingNS::NAMESPACE;
 		}
 	}
 }

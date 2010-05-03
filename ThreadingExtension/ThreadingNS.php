@@ -3,6 +3,7 @@
 
 class ThreadingNS {
 	const NAMESPACE		= 'http://purl.org/syndication/thread/1.0';
+	const PREFIX		= 'thr';
 	
 	const IN_REPLY_TO_ELEMENT	= 'in-reply-to';
 	

@@ -11,6 +11,9 @@ class ActivityEntryExtension extends StructuredActivityExtension {
 	protected $_target;
 	protected $_verb;
 	
+	/**
+	 * @return ActivityObjectExtension
+	 */
 	public function addObject() {
 		$newObject = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::OBJECT_ELEMENT, null);
 		return $this->_object[] = new ActivityObjectExtension($newObject, ActivityNS::OBJECT_ELEMENT);
@@ -21,8 +24,8 @@ class ActivityEntryExtension extends StructuredActivityExtension {
 		return $this->_target[] = new ActivityObjectExtension($newTarget, ActivityNS::TARGET_ELEMENT);
 	}
 	
-	public function addVerb() {
-		$newVerb = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::VERB_ELEMENT, null);
+	public function addVerb($verb=null) {
+		$newVerb = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::VERB_ELEMENT, $verb);
 		return $this->_verb[] = new SimpleActivityExtension($newVerb, ActivityNS::VERB_ELEMENT);
 	}
 	

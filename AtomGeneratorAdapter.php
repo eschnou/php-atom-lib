@@ -1,8 +1,8 @@
 <?php
 
-require_once 'StandardAtomAdapter.php';
+require_once 'SimpleAtomAdapter.php';
 
-class AtomGeneratorAdapter extends StandardAtomAdapter {
+class AtomGeneratorAdapter extends SimpleAtomAdapter {
 	
 	public function getUri() {
 		return $this->_getAttribute(AtomNS::URI_ATTRIBUTE);

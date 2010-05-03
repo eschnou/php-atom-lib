@@ -12,7 +12,7 @@ class SimpleActivityExtension extends SimpleAtomAdapter {
 		
 		$this->_prefix = $this->_getPrefix(ActivityNS::NAMESPACE);
 		if ($this->_prefix === null) {
-			$this->_prefix = 'activity';
+			$this->_prefix = ActivityNS::NAMESPACE;
 		}
 	}
 }

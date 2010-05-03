@@ -16,16 +16,25 @@ class AtomSourceAdapter extends ExtensibleAtomAdapter  {
 	protected $_title;
 	protected $_updated;
 	
+	/**
+	 * @return AtomPersonConstructAdapter
+	 */
 	public function addAuthor() {
 		$newAuthor = $this->_addElement(AtomNS::NAMESPACE, AtomNS::AUTHOR_ELEMENT);
 		return $this->_author[] = new AtomPersonConstructAdapter(AtomNS::AUTHOR_ELEMENT, $newAuthor);
 	}
 	
+	/**
+	 * @return AtomCategoryAdapter
+	 */
 	public function addCategory() {
 		$newCategory = $this->_addElement(AtomNS::NAMESPACE, AtomNS::CATEGORY_ELEMENT);
 		return $this->_category[] = new AtomCategoryAdapter($newCategory);
 	}
 	
+	/**
+	 * @return AtomLinkAdapter
+	 */
 	public function addLink() {
 		$newLink = $this->_addElement(AtomNS::NAMESPACE, AtomNS::LINK_ELEMENT);
 		return $this->_link[] = new AtomLinkAdapter($newLink);
@@ -39,6 +48,9 @@ class AtomSourceAdapter extends ExtensibleAtomAdapter  {
 		return $this->_category;
 	}
 	
+	/**
+	 * @return SimpleAtomAdapter
+	 */
 	public function getId() {
 		return $this->_id;
 	}
@@ -47,14 +59,23 @@ class AtomSourceAdapter extends ExtensibleAtomAdapter  {
 		return $this->_link;
 	}
 
+	/**
+	 * @return AtomTextConstructAdapter
+	 */
 	public function getTitle() {
 		return $this->_title; 
 	}
 	
+	/**
+	 * @return AtomDateConstructAdapter
+	 */
 	public function getUpdated() {
 		return $this->_updated;
 	}
 	
+	/**
+	 * @param string $value
+	 */
 	public function setId($value) {
 		if (!isset($this->_id)) {
 			$id = $this->_addElement(AtomNS::NAMESPACE, AtomNS::ID_ELEMENT, $value);
@@ -64,6 +85,9 @@ class AtomSourceAdapter extends ExtensibleAtomAdapter  {
 		$this->_id->value = $value;
 	}
 	
+	/**
+	 * @param string $value
+	 */
 	public function setTitle($value) {
 		if (!isset($this->_title)) {
 			$title = $this->_addElement(AtomNS::NAMESPACE, AtomNS::TITLE_ELEMENT, $value);
@@ -73,6 +97,9 @@ class AtomSourceAdapter extends ExtensibleAtomAdapter  {
 		$this->_title->value = $value;
 	}
 	
+	/**
+	 * @param string $value
+	 */
 	public function setUpdated($value) {
 		if (!isset($this->_updated)) {
 			$updated = $this->_addElement(AtomNS::NAMESPACE, AtomNS::UPDATED_ELEMENT, $value);

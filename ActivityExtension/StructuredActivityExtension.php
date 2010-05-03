@@ -12,10 +12,10 @@ class StructuredActivityExtension extends ExtensibleAtomAdapter {
 		
 		$this->_prefix = $this->_getPrefix(ActivityNS::NAMESPACE);
 		if ($this->_prefix === null) {
-			$this->_prefix = 'activity';
+			$this->_prefix = ActivityNS::NAMESPACE;
 		}
 		
-		$this->_fetchChilds(AtomNS::NAMESPACE);
+		//$this->_fetchChilds(AtomNS::NAMESPACE);
 		$this->_fetchChilds(ActivityNS::NAMESPACE);
 	}
 }

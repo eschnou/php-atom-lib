@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/">
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0/">
 	<id>http://localhost:8080/resources/timezones</id>
 	<title type="text">Time Zones</title>
 	<link href="http://localhost:8080/resources/timezones" rel="self" />

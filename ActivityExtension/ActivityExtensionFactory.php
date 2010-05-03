@@ -2,7 +2,7 @@
 require_once 'ActivityEntryExtension.php';
 require_once 'ActivityObjectExtension.php';
 require_once 'ActivityNS.php';
-
+require_once 'ActivityProcessor/ActivityProcessorFactory.php';
 
 class ActivityExtensionException extends Exception { }
 

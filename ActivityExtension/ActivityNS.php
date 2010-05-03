@@ -3,11 +3,15 @@
 
 class ActivityNS {
 	const NAMESPACE		= 'http://activitystrea.ms/spec/1.0/';
+	const PREFIX		= 'activity';
 	
 	const VERB_ELEMENT			= 'verb';
 	const OBJECT_ELEMENT		= 'object';
 	const OBJECT_TYPE_ELEMENT	= 'object-type';
 	const TARGET_ELEMENT		= 'target';
+	
+	const WIDTH_ATTRIBUTE		= 'width';
+	const HEIGHT_ATTRIBUTE		= 'height';
 	
 	const FAVORITE_VERB			= 'http://activitystrea.ms/schema/1.0/favorite';
 	const FOLLOWING_VERB		= 'http://activitystrea.ms/schema/1.0/follow';

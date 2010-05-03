@@ -8,6 +8,9 @@ class AtomFeedAdapter extends AtomSourceAdapter  {
 	protected $_entry;
 	protected $_generator;
 	
+	/**
+	 * @return AtomEntryAdapter;
+	 */
 	public function addEntry() {
 		$newEntry = $this->_addElement(AtomNS::NAMESPACE, AtomNS::ENTRY_ELEMENT);
 		return $this->_entry[] = new AtomEntryAdapter($newEntry);
@@ -30,7 +33,7 @@ class AtomFeedAdapter extends AtomSourceAdapter  {
 		$this->_generator->value = $value;
 	}
 	
-	public function __construct($data, $data_is_url=false) {
+	public function __construct($data=null, $data_is_url=false) {
 		parent::__construct(AtomNS::FEED_ELEMENT, $data, $data_is_url);
 		//$this->_init();
 	}

@@ -1,8 +1,8 @@
 <?php
 
-require_once 'StandardAtomAdapter.php';
+require_once 'SimpleAtomAdapter.php';
 
-class AtomLinkAdapter extends StandardAtomAdapter {
+class AtomLinkAdapter extends SimpleAtomAdapter {
 	
 	public function getHref() {
 		return $this->_getAttribute(AtomNS::HREF_ATTRIBUTE);

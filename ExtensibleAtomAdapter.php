@@ -3,18 +3,9 @@
 require_once 'BaseAtomAdapter.php';
 require_once 'AtomExtensionManager.php';
 
-class ExtensibleAtomAdapter extends BaseAtomAdapter { //I think I have to add setElement method
+class ExtensibleAtomAdapter extends BaseAtomAdapter {
 	
 	protected $_element;
-	
-	public function addNamespace($prefix, $namespace) {
-		$this->_atomNode->addAttribute($prefix.':temp',null,$namespace);
-		unset($this->_atomNode->attributes($namespace)->temp);
-	}
-
-	public function getExtension($namespace) {
-		return AtomExtensionManager::getInstance()->getExtensionAdapter($this->_atomNode, $namespace);
-	}
 	
 	public function __construct($adapterType, $data, $data_is_url=false) {
 		parent::__construct($adapterType, $data, $data_is_url);
