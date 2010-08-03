@@ -28,6 +28,6 @@ class ActivityExtensionFactory implements IAtomExtensionFactory {
 	}
 	
 	public function getNamespace() {
-		return ActivityNS::NAMESPACE;
+		return ActivityNS::NS;
 	}
 }

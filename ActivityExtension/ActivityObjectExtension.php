@@ -11,7 +11,7 @@ class ActivityObjectExtension extends AtomEntryAdapter {
 	 * @return MediaLinkExtension
 	 */
 	public function addLink() {
-		$newLink = $this->_addElement(AtomNS::NAMESPACE, AtomNS::LINK_ELEMENT);
+		$newLink = $this->_addElement(AtomNS::NS, AtomNS::LINK_ELEMENT);
 		return $this->_link[] = new MediaLinkExtension($newLink);
 	}
 	
@@ -20,13 +20,13 @@ class ActivityObjectExtension extends AtomEntryAdapter {
 	 * @return SimpleActivityExtension
 	 */
 	public function addObjectType($value=null) {
-		$newObjectType = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::OBJECT_TYPE_ELEMENT, $value);
+		$newObjectType = $this->_addElement(ActivityNS::NS, ActivityNS::OBJECT_TYPE_ELEMENT, $value);
 		return $this->_objectType[] = new SimpleActivityExtension($newObjectType, ActivityNS::OBJECT_TYPE_ELEMENT);
 	}
 	
 	public function setDescription($value=null) {
 		if (!isset($this->_description)) {
-			$description = $this->_addElement(MediaNS::NAMESPACE, MediaNS::DESCRIPTION_ELEMENT, $value);
+			$description = $this->_addElement(MediaNS::NS, MediaNS::DESCRIPTION_ELEMENT, $value);
 			$this->_description = new MediaDescriptionExtension($description);
 			return;
 		}
@@ -55,14 +55,14 @@ class ActivityObjectExtension extends AtomEntryAdapter {
 			throw new ActivityExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(ActivityNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(ActivityNS::NS);
 		if ($this->_prefix === null) {
-			$this->_prefix = ActivityNS::NAMESPACE;
+			$this->_prefix = ActivityNS::NS;
 		}
 		
-		$this->_fetchChilds(AtomNS::NAMESPACE);
-		$this->_fetchChilds(ActivityNS::NAMESPACE);
-		$this->_fetchChilds(MediaNS::NAMESPACE);
+		$this->_fetchChilds(AtomNS::NS);
+		$this->_fetchChilds(ActivityNS::NS);
+		$this->_fetchChilds(MediaNS::NS);
 		
 		$this->_init();
 	}
@@ -85,7 +85,7 @@ class ActivityObjectExtension extends AtomEntryAdapter {
 		//unset($this->_link);
 		$this->_link = array();
 		foreach ($tempLink as $link) {
-			$this->_link[] = $link->getExtension(MediaNS::NAMESPACE);
+			$this->_link[] = $link->getExtension(MediaNS::NS);
 		}
 	}
 }

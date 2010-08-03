@@ -10,12 +10,12 @@ class StructuredActivityExtension extends ExtensibleAtomAdapter {
 			throw new ActivityExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(ActivityNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(ActivityNS::NS);
 		if ($this->_prefix === null) {
-			$this->_prefix = ActivityNS::NAMESPACE;
+			$this->_prefix = ActivityNS::NS;
 		}
 		
-		//$this->_fetchChilds(AtomNS::NAMESPACE);
-		$this->_fetchChilds(ActivityNS::NAMESPACE);
+		//$this->_fetchChilds(AtomNS::NS);
+		$this->_fetchChilds(ActivityNS::NS);
 	}
 }

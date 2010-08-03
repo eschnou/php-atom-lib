@@ -21,7 +21,7 @@ class AtomEntryAdapter extends AtomSourceAdapter {
 	
 	public function setContent($value) {
 		if (!isset($this->_content)) {
-			$content = $this->_addElement(AtomNS::NAMESPACE, AtomNS::CONTENT_ELEMENT, $value);
+			$content = $this->_addElement(AtomNS::NS, AtomNS::CONTENT_ELEMENT, $value);
 			$this->_content = new AtomContentAdapter($content);
 			return;
 		}
@@ -30,7 +30,7 @@ class AtomEntryAdapter extends AtomSourceAdapter {
 	
 	public function setPublished($value) {
 		if (!isset($this->_published)) {
-			$published = $this->_addElement(AtomNS::NAMESPACE, AtomNS::PUBLISHED_ELEMENT, $value);
+			$published = $this->_addElement(AtomNS::NS, AtomNS::PUBLISHED_ELEMENT, $value);
 			$this->_published = new AtomDateConstructAdapter(AtomNS::PUBLISHED_ELEMENT, $published);
 			return;
 		}
@@ -39,7 +39,7 @@ class AtomEntryAdapter extends AtomSourceAdapter {
 	
 	public function setSummary($value) {
 		if (!isset($this->_summary)) {
-			$summary = $this->_addElement(AtomNS::NAMESPACE, AtomNS::SUMMARY_ELEMENT, $value);
+			$summary = $this->_addElement(AtomNS::NS, AtomNS::SUMMARY_ELEMENT, $value);
 			$this->_summary = new AtomTextConstructAdapter(AtomNS::SUMMARY_ELEMENT, $summary);
 			return;
 		}

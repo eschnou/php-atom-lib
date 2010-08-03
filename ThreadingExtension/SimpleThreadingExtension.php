@@ -10,9 +10,9 @@ class SimpleThreadingExtension extends SimpleAtomAdapter {
 			throw new ThreadingExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(ThreadingNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(ThreadingNS::NS);
 		if ($this->_prefix === null) {
-			$this->_prefix = ThreadingNS::NAMESPACE;
+			$this->_prefix = ThreadingNS::NS;
 		}
 	}
 }

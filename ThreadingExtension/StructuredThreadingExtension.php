@@ -10,11 +10,11 @@ class StructuredThreadingExtension extends ExtensibleAtomAdapter {
 			throw new ThreadingExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(ThreadingNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(ThreadingNS::NS);
 		if ($this->_prefix === null) {
-			$this->_prefix = ThreadingNS::NAMESPACE;
+			$this->_prefix = ThreadingNS::NS;
 		}
 		
-		$this->_fetchChilds(ThreadingNS::NAMESPACE);
+		$this->_fetchChilds(ThreadingNS::NS);
 	}
 }

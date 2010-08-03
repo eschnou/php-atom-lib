@@ -25,6 +25,6 @@ class MediaExtensionFactory implements IAtomExtensionFactory {
 	}
 	
 	public function getNamespace() {
-		return MediaNS::NAMESPACE;
+		return MediaNS::NS;
 	}
 }

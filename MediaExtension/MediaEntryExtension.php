@@ -13,7 +13,7 @@ class MediaEntryExtension extends StructuredMediaExtension {
 	
 	public function setDescription($value) {
 		if (!isset($this->_description)) {
-			$description = $this->_addElement(MediaNS::NAMESPACE, MediaNS::DESCRIPTION_ELEMENT, $value);
+			$description = $this->_addElement(MediaNS::NS, MediaNS::DESCRIPTION_ELEMENT, $value);
 			$this->_description = new MediaDescriptionExtension($description);
 			return;
 		}

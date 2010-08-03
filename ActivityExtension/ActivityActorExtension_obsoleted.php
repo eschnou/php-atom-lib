@@ -7,7 +7,7 @@ class ActivityActorExtension_obsoleted extends StructuredActivityExtension {
 	protected $_objectType; 
 	
 	public function addObjectType() {
-		$newObjectType = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::OBJECT_TYPE_ELEMENT);
+		$newObjectType = $this->_addElement(ActivityNS::NS, ActivityNS::OBJECT_TYPE_ELEMENT);
 		return $this->_objectType[] = new ActivityObjectTypeExtension($newObjectType);
 	}
 	

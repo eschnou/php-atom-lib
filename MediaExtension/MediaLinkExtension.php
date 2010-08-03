@@ -8,27 +8,27 @@ class MediaLinkExtension extends AtomLinkAdapter {
 	protected $_duration;
 	
 	public function getWidth() {
-		return $this->_getAttribute(MediaNS::WIDTH_ATTRIBUTE, MediaNS::NAMESPACE);
+		return $this->_getAttribute(MediaNS::WIDTH_ATTRIBUTE, MediaNS::NS);
 	}
 	
 	public function getHeight() {
-		return $this->_getAttribute(MediaNS::HEIGHT_ATTRIBUTE, MediaNS::NAMESPACE);
+		return $this->_getAttribute(MediaNS::HEIGHT_ATTRIBUTE, MediaNS::NS);
 	}
 	
 	public function getDuration() {
-		return $this->_getAttribute(MediaNS::DURATION_ATTRIBUTE, MediaNS::NAMESPACE);
+		return $this->_getAttribute(MediaNS::DURATION_ATTRIBUTE, MediaNS::NS);
 	}
 	
 	public function setWidth($value) {
-		$this->_setAttribute(MediaNS::WIDTH_ATTRIBUTE, $value, MediaNS::NAMESPACE);
+		$this->_setAttribute(MediaNS::WIDTH_ATTRIBUTE, $value, MediaNS::NS);
 	}
 	
 	public function setHeight($value) {
-		$this->_setAttribute(MediaNS::HEIGHT_ATTRIBUTE, $value, MediaNS::NAMESPACE);
+		$this->_setAttribute(MediaNS::HEIGHT_ATTRIBUTE, $value, MediaNS::NS);
 	}
 	
 	public function setDuration($value) {
-		$this->_setAttribute(MediaNS::DURATION_ATTRIBUTE, $value, MediaNS::NAMESPACE);
+		$this->_setAttribute(MediaNS::DURATION_ATTRIBUTE, $value, MediaNS::NS);
 	}
 	
 	public function __construct($data) {
@@ -38,7 +38,7 @@ class MediaLinkExtension extends AtomLinkAdapter {
 			throw new ActivityExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(MediaNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(MediaNS::NS);
 		if ($this->_prefix === null) {
 			$this->_prefix = MediaNS::PREFIX;
 		}

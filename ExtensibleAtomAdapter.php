@@ -10,7 +10,7 @@ class ExtensibleAtomAdapter extends BaseAtomAdapter {
 	public function __construct($adapterType, $data, $data_is_url=false) {
 		parent::__construct($adapterType, $data, $data_is_url);
 		
-		$this->_fetchChilds(AtomNS::NAMESPACE);
+		$this->_fetchChilds(AtomNS::NS);
 	}
 	
 	protected function _addElement($namespace, $tagName, $value=null) {

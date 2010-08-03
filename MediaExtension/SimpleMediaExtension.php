@@ -10,7 +10,7 @@ class SimpleMediaExtension extends SimpleAtomAdapter {
 			throw new ActivityExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(MediaNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(MediaNS::NS);
 		if ($this->_prefix === null) {
 			$this->_prefix = MediaNS::PREFIX;
 		}

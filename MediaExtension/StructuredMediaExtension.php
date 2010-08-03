@@ -10,12 +10,12 @@ class StructuredMediaExtension extends ExtensibleAtomAdapter {
 			throw new ActivityExtensionException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(MediaNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(MediaNS::NS);
 		if ($this->_prefix === null) {
 			$this->_prefix = MediaNS::PREFIX;
 		}
 		
-		//$this->_fetchChilds(AtomNS::NAMESPACE);
-		$this->_fetchChilds(MediaNS::NAMESPACE);
+		//$this->_fetchChilds(AtomNS::NS);
+		$this->_fetchChilds(MediaNS::NS);
 	}
 }

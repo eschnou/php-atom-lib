@@ -22,7 +22,7 @@ class AtomPersonConstructAdapter extends ExtensibleAtomAdapter {
 	
 	public function setEmail($value) {
 		if (!isset($this->_email)) {
-			$email = $this->_addElement(AtomNS::NAMESPACE, AtomNS::EMAIL_ELEMENT, $value);
+			$email = $this->_addElement(AtomNS::NS, AtomNS::EMAIL_ELEMENT, $value);
 			$this->_email = new SimpleAtomAdapter(AtomNS::EMAIL_ELEMENT, $email);
 			return;
 		}
@@ -31,7 +31,7 @@ class AtomPersonConstructAdapter extends ExtensibleAtomAdapter {
 	
 	public function setName($value) {
 		if (!isset($this->_name)) {
-			$name = $this->_addElement(AtomNS::NAMESPACE, AtomNS::NAME_ELEMENT, $value);
+			$name = $this->_addElement(AtomNS::NS, AtomNS::NAME_ELEMENT, $value);
 			$this->_name = new SimpleAtomAdapter(AtomNS::NAME_ELEMENT, $name);
 			return;
 		}
@@ -40,7 +40,7 @@ class AtomPersonConstructAdapter extends ExtensibleAtomAdapter {
 	
 	public function setUri($value) {
 		if (!isset($this->_uri)) {
-			$uri = $this->_addElement(AtomNS::NAMESPACE, AtomNS::URI_ELEMENT, $value);
+			$uri = $this->_addElement(AtomNS::NS, AtomNS::URI_ELEMENT, $value);
 			$this->_uri = new SimpleAtomAdapter(AtomNS::URI_ELEMENT, $uri);
 			return;
 		}

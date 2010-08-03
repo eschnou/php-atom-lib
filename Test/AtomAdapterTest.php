@@ -48,7 +48,7 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->_feed->author[0]->uri		, 'sandra.com');
 		$this->assertEquals($this->_feed->author[0]->email		, 'sandra@sandra.com');
 		
-		$this->assertEquals($this->_feed->updated->value		, null);
+		$this->assertEquals($this->_feed->updated				, null);
 		
 		$this->assertEquals($this->_feed->category[0]->term		, 'feed category1 term');
 		$this->assertEquals($this->_feed->category[0]->scheme	, 'feed category1 scheme');
@@ -79,7 +79,7 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($pFeed->author[0]->uri			, 'sandra.com');
 		$this->assertEquals($pFeed->author[0]->email		, 'sandra@sandra.com');
 		
-		$this->assertEquals($pFeed->updated->value		, null);
+		$this->assertEquals($pFeed->updated					, null);
 		
 		$this->assertEquals(count($pFeed->entry)			, 1);
 		
@@ -96,9 +96,9 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		
 		$this->assertEquals($pFeed->entry[0]->published->value	, '2009-06-01T12:54:00Z');	
 		
-		$this->assertEquals($pFeed->entry[0]->updated->value		, null);
+		$this->assertEquals($pFeed->entry[0]->updated				, null);
 		
-		$this->assertEquals($pFeed->entry[0]->author[0]				, null);
+		$this->assertEquals(count($pFeed->entry[0]->author)			,0);
 		
 		$this->assertEquals($pFeed->entry[0]->updated				, null);
 		
@@ -567,9 +567,9 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 	 * @depends testBuildFeed
 	 */
 	public function testBuildActivityFeed(AtomFeedAdapter $new) {
-		$new->addNamespace('a',ActivityNS::NAMESPACE);
+		$new->addNamespace('a',ActivityNS::NS);
 		
-		$newActivityEntry = $new->entry[0]->getExtension(ActivityNS::NAMESPACE);
+		$newActivityEntry = $new->entry[0]->getExtension(ActivityNS::NS);
 		$newActivityEntry->addVerb()->value						= 'New Activity Entry Verb';
 		$newActivityEntry->addObject()->addObjectType()->value	= 'New Activity Entry Object Object Type';
 		
@@ -593,7 +593,7 @@ class AtomAdapterTest1 extends PHPUnit_Framework_TestCase {
 		$newEntryActivityTargetLink->hreflang	= 'New Entry Activity Target Link Hreflang';
 		$newEntryActivityTargetLink->length		= 'New Entry Activity Target Link Length';
 		
-		$newEntryActivityAuthor = $new->entry[0]->author[0]->getExtension(ActivityNS::NAMESPACE);
+		$newEntryActivityAuthor = $new->entry[0]->author[0]->getExtension(ActivityNS::NS);
 		$newEntryActivityAuthor->addObjectType()->value				= 'New Entry Activity Author Object Type';
 		$newEntryActivityAuthor->id									= 'New Entry Activity Author Id';
 		

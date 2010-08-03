@@ -13,7 +13,7 @@ class ThreadingEntryExtension extends StructuredThreadingExtension {
 	
 	public function setInReplyTo($ref=null, $href=null, $source=null, $type=null) {
 		if (!isset($this->_inReplyTo)) {
-			$inReplyTo = $this->_addElement(ThreadingNS::NAMESPACE, ThreadingNS::IN_REPLY_TO_ELEMENT);
+			$inReplyTo = $this->_addElement(ThreadingNS::NS, ThreadingNS::IN_REPLY_TO_ELEMENT);
 			$this->_inReplyTo = new ThreadingInReplyToExtension($inReplyTo);
 		}
 		$this->_inReplyTo->ref = $ref;

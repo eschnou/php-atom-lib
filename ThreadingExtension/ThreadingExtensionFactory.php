@@ -17,6 +17,6 @@ class ThreadingExtensionFactory implements IAtomExtensionFactory {
 	}
 	
 	public function getNamespace() {
-		return ThreadingNS::NAMESPACE;
+		return ThreadingNS::NS;
 	}
 }

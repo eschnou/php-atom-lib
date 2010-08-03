@@ -12,7 +12,7 @@ class AtomFeedAdapter extends AtomSourceAdapter  {
 	 * @return AtomEntryAdapter;
 	 */
 	public function addEntry() {
-		$newEntry = $this->_addElement(AtomNS::NAMESPACE, AtomNS::ENTRY_ELEMENT);
+		$newEntry = $this->_addElement(AtomNS::NS, AtomNS::ENTRY_ELEMENT);
 		return $this->_entry[] = new AtomEntryAdapter($newEntry);
 	}
 	
@@ -26,7 +26,7 @@ class AtomFeedAdapter extends AtomSourceAdapter  {
 	
 	public function setGenerator($value) {
 		if (!isset($this->_generator)) {
-			$generator 			= $this->_addElement(AtomNS::NAMESPACE, AtomNS::GENERATOR_ELEMENT, $value);
+			$generator 			= $this->_addElement(AtomNS::NS, AtomNS::GENERATOR_ELEMENT, $value);
 			$this->_generator 	= new AtomGeneratorAdapter($generator);
 			return;
 		}

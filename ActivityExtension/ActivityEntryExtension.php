@@ -15,17 +15,17 @@ class ActivityEntryExtension extends StructuredActivityExtension {
 	 * @return ActivityObjectExtension
 	 */
 	public function addObject() {
-		$newObject = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::OBJECT_ELEMENT, null);
+		$newObject = $this->_addElement(ActivityNS::NS, ActivityNS::OBJECT_ELEMENT, null);
 		return $this->_object[] = new ActivityObjectExtension($newObject, ActivityNS::OBJECT_ELEMENT);
 	}
 	
 	public function addTarget() {
-		$newTarget = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::TARGET_ELEMENT, null);
+		$newTarget = $this->_addElement(ActivityNS::NS, ActivityNS::TARGET_ELEMENT, null);
 		return $this->_target[] = new ActivityObjectExtension($newTarget, ActivityNS::TARGET_ELEMENT);
 	}
 	
 	public function addVerb($verb=null) {
-		$newVerb = $this->_addElement(ActivityNS::NAMESPACE, ActivityNS::VERB_ELEMENT, $verb);
+		$newVerb = $this->_addElement(ActivityNS::NS, ActivityNS::VERB_ELEMENT, $verb);
 		return $this->_verb[] = new SimpleActivityExtension($newVerb, ActivityNS::VERB_ELEMENT);
 	}
 	
@@ -47,7 +47,7 @@ class ActivityEntryExtension extends StructuredActivityExtension {
 	
 	public function setGenerator($value) {
 		if (!isset($this->_generator)) {
-			$generator = $this->_addElement(AtomNS::NAMESPACE, AtomNS::GENERATOR_ELEMENT, $value);
+			$generator = $this->_addElement(AtomNS::NS, AtomNS::GENERATOR_ELEMENT, $value);
 			$this->_generator = new AtomGeneratorAdapter($generator);
 			return;
 		}

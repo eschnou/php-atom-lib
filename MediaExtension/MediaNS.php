@@ -2,7 +2,7 @@
 
 
 class MediaNS {
-	const NAMESPACE		= 'http://purl.org/syndication/atommedia';
+	const NS		= 'http://purl.org/syndication/atommedia';
 	const PREFIX		= 'media';
 	
 	const DESCRIPTION_ELEMENT			= 'description';

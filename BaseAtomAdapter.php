@@ -42,7 +42,7 @@ abstract class BaseAtomAdapter {
 			$this->_atomNode = $data;
 		}
 		else if ($data === null) {
-			$this->_atomNode = new SimpleXMLElement("<".$adapterType." xmlns='".AtomNS::NAMESPACE."'></".$adapterType.">",null,$data_is_url);
+			$this->_atomNode = new SimpleXMLElement("<".$adapterType." xmlns='".AtomNS::NS."'></".$adapterType.">",null,$data_is_url);
 		}
 		else { 		
 			throw new AtomAdapterException("Invalid Data Type");
@@ -52,7 +52,7 @@ abstract class BaseAtomAdapter {
 			throw new AtomAdapterException("Invalid XML Object");
 		}
 		
-		$this->_prefix = $this->_getPrefix(AtomNS::NAMESPACE);
+		$this->_prefix = $this->_getPrefix(AtomNS::NS);
 		if ($this->_prefix === null) {
 			throw new AtomAdapterException("Invalid Atom Document");
 		}

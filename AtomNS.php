@@ -1,7 +1,7 @@
 <?php
 
 class AtomNS {
-	const NAMESPACE				= 'http://www.w3.org/2005/Atom';
+	const NS				= 'http://www.w3.org/2005/Atom';
 	const PREFIX				= 'atom';
 	
 	const FEED_ELEMENT			= 'feed';

@@ -15,15 +15,15 @@ class MediaExtensionTest extends PHPUnit_Framework_TestCase {
 	
 	public function testBuildMediaEntry() {
 		$feed = new AtomFeedAdapter(null);
-		$feed->addNamespace('m', MediaNS::NAMESPACE);
+		$feed->addNamespace('m', MediaNS::NS);
 		
 		$entry = $feed->addEntry();
 		
-		$mediaEntry = $entry->getExtension(MediaNS::NAMESPACE);
+		$mediaEntry = $entry->getExtension(MediaNS::NS);
 		$mediaEntry->description = 'this is the media description';
 		
 		$link = $entry->addLink();
-		$mediaLink = $link->getExtension(MediaNS::NAMESPACE);
+		$mediaLink = $link->getExtension(MediaNS::NS);
 		$mediaLink->rel			= 'this is the media link rel';
 		$mediaLink->href		= 'this is the media link href';
 		$mediaLink->type		= 'this is the media link type';
@@ -44,8 +44,8 @@ class MediaExtensionTest extends PHPUnit_Framework_TestCase {
 	 * @depends testBuildMediaEntry
 	 */
 	public function testMediaContents(AtomFeedAdapter $feed) {
-		$mediaEntry = $feed->entry[0]->getExtension(MediaNS::NAMESPACE);
-		$mediaLink  = $feed->entry[0]->link[0]->getExtension(MediaNS::NAMESPACE);
+		$mediaEntry = $feed->entry[0]->getExtension(MediaNS::NS);
+		$mediaLink  = $feed->entry[0]->link[0]->getExtension(MediaNS::NS);
 		
 		$this->assertEquals($mediaEntry->description->value	, 'this is the media description');
 		$this->assertEquals($mediaLink->rel					, 'this is the media link rel');
@@ -62,10 +62,10 @@ class MediaExtensionTest extends PHPUnit_Framework_TestCase {
 	 * @depends testMediaContents
 	 */
 	public function testSetMediaContents(AtomFeedAdapter $feed) {
-		$mediaEntry = $feed->entry[0]->getExtension(MediaNS::NAMESPACE);
+		$mediaEntry = $feed->entry[0]->getExtension(MediaNS::NS);
 		$mediaEntry->description = 'changed media description';
 		
-		$mediaLink  = $feed->entry[0]->link[0]->getExtension(MediaNS::NAMESPACE);
+		$mediaLink  = $feed->entry[0]->link[0]->getExtension(MediaNS::NS);
 		$mediaLink->rel			= 'changed media link rel';
 		$mediaLink->href		= 'changed media link href';
 		$mediaLink->type		= 'changed media link type';

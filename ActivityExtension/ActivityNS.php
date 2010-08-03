@@ -2,7 +2,7 @@
 
 
 class ActivityNS {
-	const NAMESPACE		= 'http://activitystrea.ms/spec/1.0/';
+	const NS		= 'http://activitystrea.ms/spec/1.0/';
 	const PREFIX		= 'activity';
 	
 	const VERB_ELEMENT			= 'verb';
